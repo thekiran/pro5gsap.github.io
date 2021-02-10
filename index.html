@@ -13,118 +13,91 @@
 
     <div class="pins">
 
-      <div class="pin pin1">
+        <div class="pin pin1">
 
             <section>
-                <!-- <header style="overflow: hidden;">
+                <header style="overflow: hidden;">
                     <h2>MODERN</h2>
                     <h2 style="width: 170px;">TITLES</h2>
                     <h2>ANIMATION </h2>
-                </header> -->
-                <video autoplay muted loop id="myVideo">
-                 <source src="./1.mp4" type="video/mp4">
+                </header>
+                <video autoplay muted src="video1.mp4" id="video1" plays-inline>
+                    <!-- <source src="videos/video1.mp4" type="video/mp4"> -->
                 </video>
             </section>
         </div>
-        <!-- <div class="pin pin2">
-             <section>
+        <div class="pin pin2">
+            <section>
 
                 <header class="sec anim" style="overflow: hidden;">
                     <span>TITLES</span>
                     <h2>MODERN</h2>
                 </header>
-                <video autoplay muted loop id="myVideo">
-                   <source src="./videos/video2.mp4" type="video/mp4"> 
+                <video autoplay muted>
+                    <!-- <source src="./videos/video2.mp4" type="video/mp4">  -->
                 </video>
             </section>
-        </div> -->
-        <!-- <div class="pin pin3">
+        </div>
+        <div class="pin pin3">
             <section>
                 <header class="thr anim" style="overflow: hidden;">
-                 
-                    <h2>THANK'S <br/>
-                    FOR WATCHING</h2>
+
+                    <h2>THANK'S <br />
+                        FOR WATCHING</h2>
                 </header>
-                <video autoplay muted loop id="myVideo">
-                    <source src="./videos/video3.mp4" type="video/mp4">
+                <video autoplay muted>
+                    <!-- <source src="./videos/video3.mp4" type="video/mp4"> -->
                 </video>
             </section>
-        </div> -->
+        </div>
 
 
     </div>
 
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-        let sections = gsap.utils.toArray(".pin");
+    <script> 
+      gsap.registerPlugin(ScrollTrigger);
+        // let sections = gsap.utils.toArray(".pin");
 
-        gsap.to(sections, {
-            xPercent: -100 * (sections.length - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".pins",
-                pin: true,
-                scrub: true,
-                snap: 1 / (sections.length - 1),
-                // base vertical scrolling on how wide the container is so it feels more natural.
-                end: () => "+=" + document.querySelector(".pins").offsetWidth
-            }
-        });
+        //      gsap.to(sections, {
+        //     xPercent: -100 * (sections.length - 1),
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: ".pins",
+        //         pin: true,
+        //         scrub: true,
+        //         snap: 1 / (sections.length - 1),
+        //         // base vertical scrolling on how wide the container is so it feels more natural.
+        //         end: () => "+=" + document.querySelector(".pins").offsetWidth
+        //     }
+        // });
 
-        // gsap.registerPlugin(ScrollTrigger);
-        // gsap.from('.pin section h2',{x:0,width:0,duration:1.5})
-        gsap.from('.pin1 section h2', { x: -20, y: 20, scale: 1.5, width: 0, duration: .75 })      
-        // gsap.to('.pin2 .sec h2', { x: -20, y: 20, scale: 1.5, width: 0, duration: .75})
-   
+        
+        gsap.from('.pin1 section h2', { x: -20, y: 20, scale: 1.5, width: 0, duration: .75 })  
+
     </script>
-    <script>
-        let options = {
-            // root: document.querySelector('#scrollArea'),
-            rootMargin: '0px 0px 0px 0px',
-            threshold: 1.0
+     <script>
+
+        const pins = document.querySelector('.pins')
+        const pin1 = document.querySelector('.pin1')
+        const video1 = document.querySelector('#video1')
+        const pin2 = document.querySelector('.pin2')
+        const pin3 = document.querySelector('.pin3')
+
+       video1.addEventListener('ended',vid1);
+
+          function vid1(e) {
+           console.log('e.target')
+            // gsap.to(".pin1", {xPercent:'50', scale:.5, duration:.5})
+            e.target.classList.add('anim')
+
+        //  console.log('finishanim')
         }
+  </script>
 
-        let observer = new IntersectionObserver((entries, observer) => {
-          
-            if(entries[0].isIntersecting){
-                console.log(entries[0].target)
-                entries[0].target.classList.remove('anim')
-        // gsap.from('.pin2 .sec h2', { x: -20, y: 20, scale: 1.5, width: 0, duration: .75})
-        gsap.from('.sec h2', { x: -20, y: 20, scale: 1.5, width: 0, duration: .75})
-        // gsap.to('.pin2 .sec h2', { x: 0, y: 0, scale: 1, duration: .75})
-            }else{
-                entries[0].target.classList.add('anim')
-
-            }
-        }, options);
-
-        let target = document.querySelector('.sec');
-         observer.observe(target);
-      
-        let observer2 = new IntersectionObserver((entries, observer) => {
-          
-            if(entries[0].isIntersecting){
-                console.log(entries[0].target)
-                entries[0].target.classList.remove('anim')
-        // gsap.from('.pin2 .sec h2', { x: -20, y: 20, scale: 1.5, width: 0, duration: .75})
-        gsap.from('.thr h2', { x:0, y: 20, scale: 1.5, width: 0, duration: .75})
-        // gsap.to('.pin2 .sec h2', { x: 0, y: 0, scale: 1, duration: .75})
-            } 
-        },  {
-            // root: document.querySelector('#scrollArea'),
-            rootMargin: '0px 0px 0px 0px', 
-        });
-
-        let tar = document.querySelector('.thr');
-         observer2.observe(tar);
-      
-
-
-    </script> -->
 </body>
 
 </html>
